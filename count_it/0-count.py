@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-import requests
 import re
+import requests
 
 """
         Recursively queries the Reddit API and counts occurrences of keywords
