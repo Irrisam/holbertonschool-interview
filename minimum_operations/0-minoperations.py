@@ -1,8 +1,16 @@
 #!/usr/bin/python3
+"""
+Calculate the fewest number of operations needed to get n 'H' characters
+    starting with just one 'H' character, using only Copy All and
+    Paste operations.
+"""
+
+
 def minOperations(n):
     """
     Calculate the fewest number of operations needed to get n 'H' characters
-    starting with just one 'H' character, using only Copy All and Paste operations.
+    starting with just one 'H' character, using only Copy All and
+    Paste operations.
 
     Args:
         n: The desired number of 'H' characters
