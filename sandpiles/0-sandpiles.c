@@ -2,7 +2,10 @@
 #include <stdbool.h>
 
 /**
- * is_stable - check if the sandpile is stable
+ * is_stable - Check if the sandpile is stable
+ * @grid: 3x3 grid representing the sandpile
+ *
+ * Return: 1 if stable, 0 otherwise
  */
 int is_stable(int grid[3][3])
 {
@@ -22,7 +25,9 @@ int is_stable(int grid[3][3])
 }
 
 /**
- * topple - topple the sandpile at the given coordinates
+ * topple - Topple the sandpile at unstable cells
+ * @grid: 3x3 grid representing the sandpile
+ * @grid_tmp: Temporary 3x3 grid to store changes
  */
 void topple(int grid[3][3], int grid_tmp[3][3])
 {
@@ -50,7 +55,9 @@ void topple(int grid[3][3], int grid_tmp[3][3])
 }
 
 /**
- * sandpiles_sum- sandpile addition
+ * sandpiles_sum - Add two sandpiles and stabilize the result
+ * @grid1: First 3x3 grid representing a sandpile
+ * @grid2: Second 3x3 grid representing a sandpile
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
@@ -75,8 +82,8 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 }
 
 /**
- * print_grid- print grid
- * Return: printed grid
+ * print_grid - Print a 3x3 grid
+ * @grid: 3x3 grid to print
  */
 static void print_grid(int grid[3][3])
 {
