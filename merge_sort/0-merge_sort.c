@@ -101,8 +101,6 @@ void merge_sort(int *array, size_t size)
     if (!array || size < 2)
         return;
 
-    print_array(array, size);
-
     temp = malloc(sizeof(int) * size);
     if (!temp)
         return;
