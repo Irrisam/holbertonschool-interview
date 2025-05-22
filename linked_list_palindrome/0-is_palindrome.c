@@ -3,79 +3,69 @@
 #include "lists.h"
 
 /**
- test if a linked list is a palindrome
+ * is_palindrome - checks if a linked list is a palindrome
+ * @head: pointer to pointer to head of list
+ * Return: 1 if palindrome, 0 if not
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head;
-	listint_t *fast = *head;
-	listint_t *stack = NULL;
+    listint_t *slow = *head;
+    listint_t *fast = *head;
+    listint_t *stack = NULL;
+    listint_t *new_node, *temp;
 
-	if (*head == NULL || (*head)->next == NULL)
-	{
-		return (1);
-	}
+    if (*head == NULL || (*head)->next == NULL)
+        return (1);
 
-	while (fast != NULL && fast->next != NULL)
-	{
-		push(&stack, slow->n);
-		slow = slow->next;
-		fast = fast->next->next;
-	}
+    /* Find middle and build stack of first half */
+    while (fast != NULL && fast->next != NULL)
+    {
+        /* Push slow->n onto stack */
+        new_node = malloc(sizeof(listint_t));
+        if (new_node == NULL)
+            return (0);
+        new_node->n = slow->n;
+        new_node->next = stack;
+        stack = new_node;
 
-	if (fast != NULL)
-	{
+        slow = slow->next;
+        fast = fast->next->next;
+    }
 
-		slow = slow->next;
-	}
+    /* Skip middle element if odd length */
+    if (fast != NULL)
+        slow = slow->next;
 
-	while (slow != NULL)
-	{
-		if (pop(&stack) != slow->n)
-		{
-			free(stack);
-			return (0);
-		}
-		slow = slow->next;
-	}
-	free(stack);
-	return (1);
-}
+    /* Compare second half with stack */
+    while (slow != NULL)
+    {
+        if (stack == NULL || stack->n != slow->n)
+        {
+            /* Free remaining stack */
+            while (stack != NULL)
+            {
+                temp = stack;
+                stack = stack->next;
+                free(temp);
+            }
+            return (0);
+        }
+        
+        /* Pop from stack */
+        temp = stack;
+        stack = stack->next;
+        free(temp);
+        
+        slow = slow->next;
+    }
 
-/**
- pushes an element on top of stack
- */
-void push(listint_t **stack, int n)
-{
-	listint_t *new_node = malloc(sizeof(listint_t));
+    /* Free any remaining stack */
+    while (stack != NULL)
+    {
+        temp = stack;
+        stack = stack->next;
+        free(temp);
+    }
 
-	if (new_node == NULL)
-	{
-		exit(EXIT_FAILURE);
-	}
-
-	new_node->n = n;
-	new_node->next = *stack;
-	*stack = new_node;
-}
-/**
- pop - pops an element from the top of the stac
- */
-int pop(listint_t **stack)
-{
-listint_t *temp;
-int n;
-
-if (*stack == NULL)
-{
-exit(EXIT_FAILURE);
-}
-
-temp = *stack;
-n = temp->n;
-
-*stack = (*stack)->next;
-free(temp);
-
-return (n);
+    return (1);
 }
