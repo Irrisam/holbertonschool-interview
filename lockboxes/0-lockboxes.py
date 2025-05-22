@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+that module is very documented, should be plenty
+"""
+
+
 def canUnlockAll(boxes):
     """Determines if all boxes can be opened starting from box 0.
     Args:
