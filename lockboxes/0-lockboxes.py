@@ -25,6 +25,8 @@ def canUnlockAll(boxes):
             break
     return len(opened) == n
 # Alternative BFS solution
+
+
 def canUnlockAll_bfs(boxes):
     """
     BFS approach to solve the same problem.
@@ -45,6 +47,8 @@ def canUnlockAll_bfs(boxes):
                 queue.append(key)
     return all(opened)
 # Test cases
+
+
 def test_canUnlockAll():
     """Test the function with various cases"""
     # Test case 1: All boxes can be opened
