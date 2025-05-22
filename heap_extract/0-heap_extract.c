@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "binary_trees.h"
 
 /**
  * check_height - Check the height of a binary tree
