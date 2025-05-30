@@ -9,6 +9,7 @@
  * @nb_words: Number of words in the words array
  * @n: Pointer to store the number of indices found
  *
+ * Return: Array of indices or NULL
  */
 int *find_substring(char const *s, char const **words, int nb_words, int *n);
 
