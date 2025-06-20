@@ -52,21 +52,18 @@ static void counting_sort_radix(int *array, size_t size, int exp)
 	/* Tally up the occurrences of each digit at the current place */
 	for (i = 0; i < size; i++)
 		count[(array[i] / exp) % 10]++;
-
 	/*
 	 * Modify count so that it reflects positions
 	 * in the final output
 	 */
 	for (j = 1; j < 10; j++)
 		count[j] += count[j - 1];
-
 	/* Construct the result array by placing elements in sorted order */
 	for (i = size - 1; (int)i >= 0; i--)
 	{
 		output[count[(array[i] / exp) % 10] - 1] = array[i];
 		count[(array[i] / exp) % 10]--;
 	}
-
 	/*
 	 * Replace original array contents with sorted data
 	 * based on the current digit
