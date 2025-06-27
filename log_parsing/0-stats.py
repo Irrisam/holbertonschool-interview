@@ -20,7 +20,6 @@ def print_statistics(total_file_size, status_codes):
 
 
 def signal_handler(signum, frame):
-    """Handle keyboard interruption (CTRL+C)."""
     print_statistics(total_file_size, status_codes)
     sys.exit(0)
 
@@ -49,6 +48,7 @@ status_codes = {}
 
 
 if __name__ == "__main__":
+    # Initialize variables
     line_count = 0
 
     valid_status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
@@ -72,9 +72,8 @@ if __name__ == "__main__":
                 if line_count % 10 == 0:
                     print_statistics(total_file_size, status_codes)
 
-        if line_count % 10 != 0:
+        if line_count % 10 != 0 or line_count == 0:
             print_statistics(total_file_size, status_codes)
 
     except KeyboardInterrupt:
-        # This will be caught by the signal handler
         pass
