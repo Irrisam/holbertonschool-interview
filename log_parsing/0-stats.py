@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+'''documenting very well this module'''
 import sys
 import re
 import signal
