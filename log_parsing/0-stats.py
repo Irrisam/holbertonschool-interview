@@ -30,7 +30,6 @@ def parse_log_line(line):
     Parse a log line and extract IP, date, status code, and file size.
     Returns (status_code, file_size) if valid, (None, None) if invalid.
     """
-    # Pattern to match: <IP> - [<date>] "GET /projects/260 HTTP/1.1" <status> <size>
     pattern = r'^(\d+\.\d+\.\d+\.\d+) - \[([^\]]+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
 
     match = re.match(pattern, line.strip())
@@ -73,7 +72,9 @@ if __name__ == "__main__":
                 if line_count % 10 == 0:
                     print_statistics(total_file_size, status_codes)
 
+        if line_count % 10 != 0:
+            print_statistics(total_file_size, status_codes)
+
     except KeyboardInterrupt:
+        # This will be caught by the signal handler
         pass
-    except EOFError:
-        print_statistics(total_file_size, status_codes)
