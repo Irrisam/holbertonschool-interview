@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-"""
-Log parsing script that reads stdin line by line and computes metrics.
-Prints statistics every 10 lines and/or on keyboard interruption.
-"""
 
 import sys
 import re
@@ -10,7 +6,7 @@ import signal
 
 
 def print_statistics(total_file_size, status_codes):
-    """Print the current statistics."""
+    """ prints out the stats out the stdout"""
     print("File size: {}".format(total_file_size))
 
     valid_codes = [200, 301, 400, 401, 403, 404, 405, 500]
@@ -20,16 +16,14 @@ def print_statistics(total_file_size, status_codes):
 
 
 def signal_handler(signum, frame):
+    '''executes formula'''
     print_statistics(total_file_size, status_codes)
     sys.exit(0)
 
 
 def parse_log_line(line):
-    """
-    Parse a log line and extract IP, date, status code, and file size.
-    Returns (status_code, file_size) if valid, (None, None) if invalid.
-    """
-    pattern = r'^(\d+\.\d+\.\d+\.\d+) - \[([^\]]+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
+    '''regex function scoring'''
+    pattern = r'^(\S+) - \[([^\]]+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)$'
 
     match = re.match(pattern, line.strip())
     if match:
@@ -48,7 +42,6 @@ status_codes = {}
 
 
 if __name__ == "__main__":
-    # Initialize variables
     line_count = 0
 
     valid_status_codes = [200, 301, 400, 401, 403, 404, 405, 500]
